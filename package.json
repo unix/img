@@ -1,0 +1,25 @@
+{
+  "name": "img",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:unix/img.git",
+  "author": "unix <unix.bio@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build"
+  },
+  "dependencies": {
+    "@zeit-ui/react": "^0.0.1-beta.32",
+    "html2canvas": "^1.0.0-rc.5",
+    "next": "^9.3.5",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1"
+  },
+  "devDependencies": {
+    "@mdx-js/loader": "^1.5.8",
+    "@next/mdx": "^9.3.5",
+    "rehype-join-line": "^1.0.2",
+    "styled-jsx": "^3.2.5"
+  }
+}
