@@ -6,9 +6,9 @@ const Footer = () => {
   
   return (
     <footer>
-      <Link pure>view source code</Link>
+      <Link pure target="_blank" href="https://github.com/unix/img">view source code</Link>
       <Spacer y={.5} />
-      <Link pure>Built on&nbsp;<Code>@zeit-ui/react</Code></Link>
+      <Link pure target="_blank" href="https://github.com/zeit-ui/react">Built on&nbsp;<Code>@zeit-ui/react</Code></Link>
       <style jsx>{`
         footer {
           position: fixed;
