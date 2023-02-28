@@ -7,6 +7,8 @@ const Dashboard = ({ file, onBack }) => {
   const theme = useTheme()
   const [, setToast] = useToasts()
   const [loading, setLoading] = useState(false)
+  const [copyloading, setCopyLoading] = useState(false)
+
   const [settings, setSettings] = useState({})
   const [size, setSize] = useState({ width: 700, height: 350, bar: 40 })
   const browserRef = useRef(null)
@@ -32,6 +34,30 @@ const Dashboard = ({ file, onBack }) => {
         setToast({ text: err.message })
       })
   }
+
+  const copyClickHandler = async () => {
+		setCopyLoading(true);
+		getImageBlob(ref.current)
+			.then((blob) => toCompressed(blob))
+			.then((res) => res.blob())
+			.then((blob) => {
+				setCopyLoading(false);
+				if (!blob) return setToast({ text: "Please try again later." });
+				navigator.clipboard
+					.write([
+						new ClipboardItem({
+							[blob.type]: blob,
+						}),
+					])
+					.then(
+						setToast({ text: "Copied img to clipboard." })
+					);
+			})
+			.catch((err) => {
+				setCopyLoading(false);
+				setToast({ text: err.message });
+			});
+  };
   
   return (
     <section>
@@ -63,7 +89,11 @@ const Dashboard = ({ file, onBack }) => {
       </div>
       <Spacer y={4.5} />
       <div className="actions">
+        <div className='buttons'>
         <Button onClick={clickHandler} loading={loading}>Download</Button>
+        <Spacer />
+        <Button onClick={copyClickHandler} loading={copyloading}>Copy</Button>
+        </div>
         <Spacer y={2} />
         <span>
           <Dot type="success"/> When you download, image will be <Tag
@@ -134,6 +164,10 @@ const Dashboard = ({ file, onBack }) => {
           flex-direction: column;
           justify-content: center;
           align-items: center;
+        }
+
+        .buttons {
+          display: flex
         }
       `}</style>
     </section>
